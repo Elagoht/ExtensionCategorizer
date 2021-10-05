@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+from os import system, listdir, path
+fs=[]
+for f in listdir():
+    if path.isfile(f): continue
+    else: fs.append(f)
+for f in fs:
+    system("mv ./"+f.replace(" ","\ ")+"/* .")
+    system("rm -rf ./"+f)

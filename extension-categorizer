@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+from sys import argv
+from os import system, listdir
+prefix,suffix,run="","",True
+for arg in argv:
+    if arg[:9]=="--prefix=": prefix=arg[9:]
+    if arg[:9]=="--suffix=": suffix=arg[9:]
+    if arg=="-h" or arg=="--help": run=False
+if run:
+    fs=[i for i in listdir() if i.split("/")[-1].__contains__(".")]
+    es=[i.split(".")[-1] for i in fs]
+    for e in es:
+        system("mkdir -p "+prefix+e+suffix)
+        for f in fs:
+            if f[-len(e):]==e: system("mv "+f.replace(" ","\ ")+" ./"+prefix+e+suffix)
+else: print("""
+This script creates folders into a directory to categorize files in that directory by file extensions.
+
+Arguments:
+
+    --prefix   : add prefix to folders names.
+    --suffix   : add sufffix to folders names.
+    --help, -h : show the help menu.
+
+Example:
+
+    extension-categorizer --prefix=files_that_have --suffix=_extension
+
+Notes:
+
+    In case of data loss, all responsibility belongs to user.
+""")
