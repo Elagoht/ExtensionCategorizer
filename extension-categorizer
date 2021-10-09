@@ -12,7 +12,7 @@ if run:
     for e in es:
         system("mkdir -p "+prefix+e+suffix)
         for f in fs:
-            if f[-len(e):]==e: system("mv "+f.replace(" ","\ ")+" ./"+prefix+e+suffix)
+            if f[-len(e):]==e: system("mv \""+f.replace('"','\\"')+"\" ./"+prefix+e+suffix+" 2>&-")
 else: print("""
 This script creates folders into a directory to categorize files in that directory by file extensions.
 
